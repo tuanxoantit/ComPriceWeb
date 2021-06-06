@@ -1,0 +1,34 @@
+<head>
+    <title></title>
+</head>
+<body>
+    <div>
+        <h3>Website So Sanh</h3>
+    </div>
+    <div>
+        <form method="POST">
+            <input type="text">
+            <input type="submit" value="Search">
+        </form>
+    </div>
+    <div>
+        {% block Result %}
+        {% endblock %}
+    </div>
+</body>
+
+{% extends 'Search.html' %}
+{% block Result %}
+    <h1>Ket Qua</h1>
+    {% for mKey, mValue in Result.items() %}
+        <tr>            
+            <td> 
+                {% for mData in mValue %}
+                    {% for Data in mData %}
+                        <li> {{ Data }} </li>
+                    {% endfor %}
+                {% endfor %}
+            </td>
+        </tr>
+    {% endfor %}
+{% endblock %}
