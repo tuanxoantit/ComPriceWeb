@@ -13,7 +13,7 @@ mApp = Flask(__name__)
 def Homepage():
     return render_template('Search.html')
 
-@mApp.route('/',methods=['POST'])
+@mApp.route('/Result',methods=['POST'])
 def Result():
     mTextSearch = request.form['text']
     print(mTextSearch)
@@ -22,7 +22,6 @@ def Result():
         mResult = mComparePrices.Result()
         mDataOut = {'Data': mResult}
         
-        # mDataOut = {'Data':[[1,2,3],[4,5,6]]}
         return render_template('Result.html', Result = mDataOut, TextSearch = mTextSearch)
     except:
         return 'No search results'

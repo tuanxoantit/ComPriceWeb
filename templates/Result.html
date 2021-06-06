@@ -1,15 +1,10 @@
 {% extends 'Search.html' %}
 {% block Result %}
     <h3> Search results for {{TextSearch}}</h3>
-    {% for mKey, mValue in Result.items() %}
-        <tr>            
-            <td> 
-                {% for mData in mValue %}
-                    <li>{{mData.0}}</li> 
-                    <a href= {{mData.2}}>{{mData.1}}</a>
-                    
-                {% endfor %}
-            </td>
-        </tr>
+    {% for mKey, mValue in Result.items() %}     
+        {% for mData in mValue %}
+            <li>{{mData.0}}</li> 
+            <a href= {{mData.2}} target="_blank" >{{mData.1}}</a>                    
+        {% endfor %}
     {% endfor %}
 {% endblock %}
