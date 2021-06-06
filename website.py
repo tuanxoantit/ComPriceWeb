@@ -2,10 +2,12 @@ from flask import Flask, render_template, request
 from ComparePrices import Prices
 import os
 
-TEMPLATE_DIR = os.path.abspath('../templates')
-STATIC_DIR = os.path.abspath('../static')
+# TEMPLATE_DIR = os.path.abspath('../templates')
+# STATIC_DIR = os.path.abspath('../static')
 
-mApp = Flask(__name__, template_folder=TEMPLATE_DIR, static_folder=STATIC_DIR)
+# mApp = Flask(__name__, template_folder=TEMPLATE_DIR, static_folder=STATIC_DIR)
+
+mApp = Flask(__name__)
 
 @mApp.route('/')
 def Homepage():
@@ -23,7 +25,7 @@ def Result():
         # mDataOut = {'Data':[[1,2,3],[4,5,6]]}
         return render_template('Result.html', Result = mDataOut, TextSearch = mTextSearch)
     except:
-        return 'Không có kết quả tìm kiếm'
+        return 'No search results'
 
 if __name__ == '__main__':
     mApp.run(debug=True)

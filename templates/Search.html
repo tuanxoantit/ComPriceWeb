@@ -1,17 +1,22 @@
-
-</head>
-<body>
-    <div class="mheader"> 
-        <h2>Price Comparison Websites</h2>
-    </div>
-    <div>
-        <form method="POST">
-            <input name="text">
-            <input type="submit" value="Search">
-        </form>
-    </div>
-    <div>
-        {% block Result %}
-        {% endblock %}
-    </div>
-</body>
+<html>
+    <head>
+        <link href="{{ url_for('static', filename='Search.css') }}" rel="stylesheet" type="text/css" >
+    </head>
+    <body>
+        <div class="mHeader"> 
+            <h2>Price Comparison Websites</h2>
+        </div>
+        <div>
+            <form method="POST">
+                <p>
+                    <input name="text">
+                    <input type="submit" value="Search">
+                </p>
+            </form>
+        </div>
+        <div>
+            {% block Result %}
+            {% endblock %}
+        </div>
+    </body>
+</html>

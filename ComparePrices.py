@@ -13,6 +13,7 @@ class Prices():
         mSoup = BeautifulSoup(mRes.text,'html.parser')
 
         mSpanPrices = mSoup.find_all('span', {'class' : 'a8Pemb'})
+        mStrPrices = [Price.contents[0] for Price in mSpanPrices ]
         mPrices = [int(Price.contents[0].strip('\xa0₫').replace('.','')) for Price in mSpanPrices ]
 
         mDivStores = mSoup.find_all('div', {'class' : 'mqQL1e'})
@@ -24,11 +25,11 @@ class Prices():
         # print(mPrices)
         # print(mStores)
         # print(mLinks)
-        return mPrices, mStores, mLinks
+        return mPrices, mStrPrices, mStores, mLinks
         
     def Result(self):
-        mPrices, mStores, mLinks = self.GetData()
-        mData = [[Price, Store, 'https://www.google.com{0}'.format(Link)] for Price,Store,Link in sorted(zip(mPrices,mStores,mLinks))]
+        mPrices, mStrPrices, mStores, mLinks = self.GetData()
+        mData = [[StrPrices, Store, 'https://www.google.com{0}'.format(Link)] for Price, StrPrices, Store,Link in sorted(zip(mPrices, mStrPrices, mStores, mLinks))]
         return mData
 
 
