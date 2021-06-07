@@ -13,14 +13,14 @@ class Prices():
         mSoup = BeautifulSoup(mRes.text,'html.parser')
 
         mSpanPrices = mSoup.find_all('span', {'class' : 'a8Pemb'})
-        mStrPrices = [Price.contents[0] for Price in mSpanPrices ]
-        mPrices = [int(Price.contents[0].strip('\xa0₫').replace('.','')) for Price in mSpanPrices ]
+        mStrPrices = [mPrice.contents[0] for mPrice in mSpanPrices ]
+        mPrices = [int(mPrice.contents[0].strip('\xa0₫').replace('.','')) for mPrice in mSpanPrices ]
 
         mDivStores = mSoup.find_all('div', {'class' : 'mqQL1e'})
-        mStores = [Store.find_next('span').string for Store  in mDivStores] 
+        mStores = [mStore.find_next('span').string for mStore  in mDivStores] 
 
         mALinks = mSoup.find_all('a', {'class' : 'translate-content'})
-        mLinks = [Link['href'] for Link in mALinks ]
+        mLinks = [mLink['href'] for mLink in mALinks ]
 
         # print(mPrices)
         # print(mStores)
@@ -29,7 +29,7 @@ class Prices():
         
     def Result(self):
         mPrices, mStrPrices, mStores, mLinks = self.GetData()
-        mData = [[StrPrices, Store, 'https://www.google.com{0}'.format(Link)] for Price, StrPrices, Store,Link in sorted(zip(mPrices, mStrPrices, mStores, mLinks))]
+        mData = [[StrPrices, Store, 'https://www.google.com{0}'.format(Link)] for Price, StrPrices, Store, Link in sorted(zip(mPrices, mStrPrices, mStores, mLinks))]
         return mData
 
 
