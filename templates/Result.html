@@ -1,7 +1,7 @@
 {% extends 'Search.html' %}
 {% block Result %}
-    <h3> Search results for {{TextSearch}}</h3>
-    {% for mKey, mValue in Result.items() %}     
+    <h3> Search results for {{mTextSearchHtml}}</h3>
+    {% for mKey, mValue in mResultHtml.items() %}     
         {% for mData in mValue %}
             <li>{{mData.0}}</li> 
             <a href= {{mData.2}} target="_blank" >{{mData.1}}</a>                    
