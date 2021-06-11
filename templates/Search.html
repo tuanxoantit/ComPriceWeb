@@ -1,22 +1,114 @@
-<html>
-    <head>
-        <link href="{{ url_for('static', filename='Search.css') }}" rel="stylesheet" type="text/css" >
-    </head>
-    <body>
-        <div class="mHeader"> 
-            <h2>Price Comparison Website</h2>
+<head>
+  <link href="{{ url_for('static', filename='Search.css') }}" rel="stylesheet" type="text/css" >
+</head>
+<body>
+  <header>
+    <h2>Price Comparison Website</h2>
+    <form action="/Result" method="POST">
+      <p>
+          <input type="text" name="mTextSearch" >
+          <input type="submit" value="Search">
+      </p>
+    </form>
+  </header>
+  <div class="content">
+    <div class="sidebar1">
+      <nav>        
+        <div class="filter">
+          <div class="models">
+            <div class="checkbox">
+              <label><input type="checkbox" rel="Shopee" onchange="change();" checked/>Shopee</label>
+            </div>
+            <div class="checkbox">
+              <label><input type="checkbox" rel="Tiki" onchange="change();" checked/>Tiki</label>
+            </div>
+            <div class="checkbox">
+              <label><input type="checkbox" rel="Lazada" onchange="change();" checked/>Lazada</label>
+            </div>
+          </div>
         </div>
-        <div>
-            <form method="POST" action="/Result">
-                <p>
-                    <input name="text">
-                    <input type="submit" value="Search">
-                </p>
-            </form>
-        </div>
-        <div>
-            {% block Result %}
-            {% endblock %}
-        </div>
-    </body>
-</html>
+      </nav>
+    </div>
+      <article>
+        <div id="main">
+          {% block Result %}
+          {% endblock %}
+        </div>  
+    </article>
+  </div>
+  
+
+ 
+
+  <script>
+    function change() {
+      var modelCbs = document.querySelectorAll(".models input[type='checkbox']");
+      var processorCbs = document.querySelectorAll(".processors input[type='checkbox']");
+      var filters = {
+          models: getClassOfCheckedCheckboxes(modelCbs)
+      };
+
+      filterResults(filters);
+    }
+
+    function getClassOfCheckedCheckboxes(checkboxes) {
+      var classes = [];
+
+      if (checkboxes && checkboxes.length > 0) {
+          for (var i = 0; i < checkboxes.length; i++) {
+          var cb = checkboxes[i];
+
+          if (cb.checked) {
+              classes.push(cb.getAttribute("rel"));
+          }
+          }
+      }
+
+      return classes;
+    }
+
+    function filterResults(filters) {
+      var rElems = document.querySelectorAll(".result div");
+      var hiddenElems = [];
+
+      if (!rElems || rElems.length <= 0) {
+          return;
+      }
+
+      for (var i = 0; i < rElems.length; i++) {
+        var el = rElems[i];
+
+        if (filters.models.length > 0) {
+          var isHidden = true;
+
+          for (var j = 0; j < filters.models.length; j++) {
+              var filter = filters.models[j];
+
+              if (el.classList.contains(filter)) {
+                isHidden = false;
+                break;
+              }
+          }
+
+          if (isHidden) {
+            hiddenElems.push(el);
+          }
+        }          
+      }
+
+      for (var i = 0; i < rElems.length; i++) {
+          rElems[i].style.display = "block";
+      }
+
+      if (hiddenElems.length <= 0) {
+          return;
+      }
+
+      for (var i = 0; i < hiddenElems.length; i++) {
+          hiddenElems[i].style.display = "none";
+      }
+    }
+  </script>
+
+
+</body>
