@@ -1,0 +1,106 @@
+<head>
+  <link
+    href="{{ url_for('static', filename='Search.css') }}"
+    rel="stylesheet"
+    type="text/css"
+  />
+  <script src="{{url_for('static', filename='Search.js')}}"></script>
+</head>
+<body>
+  <form action="/Result" method="POST">
+    <header>
+      <h2>Price Comparison Website</h2>
+      <p>
+        <input type="text" name="mTextSearch" />
+        <input type="submit" value="Search" />
+      </p>
+    </header>
+    <div class="content">
+      <div class="sidebar1">
+        <nav>
+          <div class="filter">
+            <div class="models">
+              {% for mIndex, mWeb in mWebSearch %}
+                <div class="checkbox">
+                  <input type="checkbox" name="mWeb" value="1" rel="Shopee" onchange="change();" checked/>
+                </div>
+              {% endfor %}
+              <div class="checkbox">
+                {% if '1' in mSelected: %}
+                <label>
+                  <input
+                    type="checkbox"
+                    name="mWeb"
+                    value="1"
+                    rel="Shopee"
+                    onchange="change();"
+                    checked
+                  />Shopee</label>
+                  {% else %}
+                  <input
+                    type="checkbox"
+                    name="mWeb"
+                    value="1"
+                    rel="Shopee"
+                    onchange="change();"
+                  />Shopee</label>
+                  {% endif %}
+              </div>
+              <div class="checkbox">
+                <label
+                  ><input
+                    type="checkbox"
+                    name="mWeb"
+                    value="2"
+                    rel="Tiki"
+                    onchange="change();"
+                    checked
+                  />Tiki</label
+                >
+              </div>
+              <div class="checkbox">
+                <label
+                  ><input
+                    type="checkbox"
+                    name="mWeb"
+                    value="3"
+                    rel="Mediamart"
+                    onchange="change();"
+                    checked
+                  />Mediamart</label
+                >
+              </div>
+              <div class="checkbox">
+                <label
+                  ><input
+                    type="checkbox"
+                    name="mWeb"
+                    value="4"
+                    rel="DienMayXanh"
+                    onchange="change();"
+                    checked
+                  />Dien May Xanh</label
+                >
+              </div>
+              <div class="checkbox">
+                <label
+                  ><input
+                    type="checkbox"
+                    name="mWeb"
+                    value="5"
+                    rel="Lazada"
+                    onchange="change();"
+                    checked
+                  />Lazada</label
+                >
+              </div>
+            </div>
+          </div>
+        </nav>
+      </div>
+      <article>
+        <div id="main">{% block Result %} {% endblock %}</div>
+      </article>
+    </div>
+  </form>
+</body>
