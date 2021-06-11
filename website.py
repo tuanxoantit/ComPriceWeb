@@ -20,6 +20,5 @@ def Result():
     except:
         return 'No search results'
 
-
 if __name__ == '__main__':
     mApp.run(debug=True)
